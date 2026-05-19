@@ -13,20 +13,59 @@
     .container { max-width: 480px; margin: 0 auto; padding: 16px; }
     #home-screen, #list-screen { display: none; }
     #home-screen.active, #list-screen.active { display: block; }
+
+    /* ── Dashboard Stats ── */
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-bottom: 18px;
+    }
+    .stat-card {
+      background: white;
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    }
+    .stat-card .stat-value { font-size: 1.6rem; font-weight: 700; line-height: 1; }
+    .stat-card .stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.06em; color: #888; margin-top: 4px; }
+    .stat-card.total   .stat-value { color: #4f46e5; }
+    .stat-card.done    .stat-value { color: #22c55e; }
+    .stat-card.pending .stat-value { color: #f59e0b; }
+    .stat-card.urgent  .stat-value { color: #ef4444; }
+
+    /* ── New List Box ── */
     .new-list-box { background: white; border-radius: 14px; padding: 16px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
     .new-list-box h2 { font-size: 1rem; margin-bottom: 10px; color: #4f46e5; }
     .input-row { display: flex; gap: 8px; }
     input[type="text"] { flex: 1; padding: 10px 14px; border: 2px solid #e0e0e0; border-radius: 10px; font-size: 0.95rem; outline: none; transition: border 0.2s; }
     input[type="text"]:focus { border-color: #4f46e5; }
-    button.btn-primary { background: #4f46e5; color: white; border: none; padding: 10px 16px; border-radius: 10px; font-size: 0.95rem; cursor: pointer; }
+    button.btn-primary { background: #4f46e5; color: white; border: none; padding: 10px 16px; border-radius: 10px; font-size: 0.95rem; cursor: pointer; white-space: nowrap; }
     button.btn-primary:active { background: #3730a3; }
+
+    /* ── Urgent Toggle ── */
+    .urgent-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; }
+    .urgent-toggle {
+      display: flex; align-items: center; gap: 6px;
+      background: #f9fafb; border: 2px solid #e0e0e0;
+      border-radius: 10px; padding: 6px 12px;
+      cursor: pointer; font-size: 0.85rem; font-weight: 600;
+      color: #888; transition: all 0.2s; user-select: none;
+    }
+    .urgent-toggle.active { background: #fff1f1; border-color: #ef4444; color: #ef4444; }
+
     .section-title { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: #888; margin-bottom: 10px; }
+
+    /* ── List Cards (Home) ── */
     .list-card { background: white; border-radius: 14px; padding: 14px 16px; margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); display: flex; align-items: center; justify-content: space-between; cursor: pointer; }
     .list-card-info { flex: 1; }
     .list-card-name { font-weight: 600; font-size: 1rem; }
     .list-card-meta { font-size: 0.78rem; color: #888; margin-top: 2px; }
     .list-card-emoji { font-size: 1.5rem; margin-right: 12px; }
     .btn-icon { background: none; border: none; font-size: 1.2rem; cursor: pointer; padding: 4px 6px; border-radius: 8px; color: #ccc; }
+
+    /* ── List Screen ── */
     .list-header { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
     .btn-back { background: white; border: 2px solid #e0e0e0; border-radius: 10px; padding: 8px 12px; font-size: 0.9rem; cursor: pointer; color: #4f46e5; font-weight: 600; }
     .list-title { font-size: 1.2rem; font-weight: 700; flex: 1; }
@@ -35,11 +74,16 @@
     .progress-label { font-size: 0.78rem; color: #888; text-align: right; margin-top: -12px; margin-bottom: 14px; }
     .add-item-box { background: white; border-radius: 14px; padding: 14px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
     .checklist-items { list-style: none; }
-    .checklist-item { background: white; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); }
+
+    /* ── Checklist Items ── */
+    .checklist-item { background: white; border-radius: 12px; padding: 12px 14px; margin-bottom: 10px; display: flex; align-items: center; gap: 12px; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: opacity 0.2s; border-left: 4px solid transparent; }
+    .checklist-item.urgent-item { border-left: 4px solid #ef4444; }
     .checklist-item.done { opacity: 0.5; }
     .checklist-item input[type="checkbox"] { width: 20px; height: 20px; accent-color: #4f46e5; cursor: pointer; flex-shrink: 0; }
     .item-label { flex: 1; font-size: 0.95rem; word-break: break-word; }
     .checklist-item.done .item-label { text-decoration: line-through; color: #aaa; }
+    .urgent-badge { font-size: 0.65rem; background: #fff1f1; color: #ef4444; border: 1px solid #fecaca; border-radius: 6px; padding: 2px 6px; font-weight: 700; text-transform: uppercase; white-space: nowrap; }
+
     .empty-state { text-align: center; padding: 30px 0; color: #bbb; font-size: 0.9rem; }
     .empty-state .icon { font-size: 2.5rem; margin-bottom: 8px; }
     .clear-btn { width: 100%; margin-top: 10px; background: #fff0f0; color: #e53e3e; border: 2px solid #fecaca; border-radius: 10px; padding: 10px; font-size: 0.9rem; cursor: pointer; font-weight: 600; }
@@ -72,16 +116,42 @@
       <button class="btn-back" onclick="goHome()">← Back</button>
       <div class="list-title" id="list-screen-title"></div>
     </div>
+
+    <!-- DASHBOARD -->
+    <div class="dashboard">
+      <div class="stat-card total">
+        <div class="stat-value" id="stat-total">0</div>
+        <div class="stat-label">Total</div>
+      </div>
+      <div class="stat-card done">
+        <div class="stat-value" id="stat-done">0</div>
+        <div class="stat-label">Done</div>
+      </div>
+      <div class="stat-card pending">
+        <div class="stat-value" id="stat-pending">0</div>
+        <div class="stat-label">Pending</div>
+      </div>
+      <div class="stat-card urgent">
+        <div class="stat-value" id="stat-urgent">0</div>
+        <div class="stat-label">Urgent</div>
+      </div>
+    </div>
+
     <div class="progress-bar-wrap">
       <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
     </div>
     <div class="progress-label" id="progress-label">0 of 0 done</div>
+
     <div class="add-item-box">
       <div class="input-row">
         <input type="text" id="new-item-input" placeholder="Add an item..." maxlength="80"/>
         <button class="btn-primary" onclick="addItem()">Add</button>
       </div>
+      <div class="urgent-row">
+        <div class="urgent-toggle" id="urgent-toggle" onclick="toggleUrgent()">🔴 Mark as Urgent</div>
+      </div>
     </div>
+
     <div class="section-title">Items</div>
     <ul class="checklist-items" id="checklist-items"></ul>
     <button class="clear-btn" onclick="clearChecked()">🗑 Remove Checked Items</button>
@@ -93,6 +163,7 @@
   // Code Generated by Sidekick is for learning and experimentation purposes only.
   let lists = [];
   let currentListId = null;
+  let isUrgent = false;
 
   function loadData() {
     const saved = localStorage.getItem('my_checklists');
@@ -116,6 +187,13 @@
     return '📋';
   }
 
+  function toggleUrgent() {
+    isUrgent = !isUrgent;
+    const btn = document.getElementById('urgent-toggle');
+    btn.classList.toggle('active', isUrgent);
+    btn.textContent = isUrgent ? '🔴 Urgent ON' : '🔴 Mark as Urgent';
+  }
+
   function renderHome() {
     const container = document.getElementById('lists-container');
     if (lists.length === 0) {
@@ -125,11 +203,13 @@
     container.innerHTML = lists.map(list => {
       const total = list.items.length;
       const done = list.items.filter(i => i.checked).length;
+      const urgent = list.items.filter(i => i.urgent && !i.checked).length;
+      const urgentBadge = urgent > 0 ? ' 🔴 ' + urgent + ' urgent' : '';
       return '<div class="list-card" onclick="openList(\'' + list.id + '\')">' +
         '<span class="list-card-emoji">' + list.emoji + '</span>' +
         '<div class="list-card-info">' +
         '<div class="list-card-name">' + list.name + '</div>' +
-        '<div class="list-card-meta">' + done + ' / ' + total + ' items done</div>' +
+        '<div class="list-card-meta">' + done + ' / ' + total + ' done' + urgentBadge + '</div>' +
         '</div>' +
         '<button class="btn-icon" onclick="deleteList(event,\'' + list.id + '\')">🗑</button>' +
         '</div>';
@@ -140,8 +220,7 @@
     const input = document.getElementById('new-list-input');
     const name = input.value.trim();
     if (!name) return;
-    const list = { id: Date.now().toString(), name, emoji: pickEmoji(name), items: [] };
-    lists.unshift(list);
+    lists.unshift({ id: Date.now().toString(), name, emoji: pickEmoji(name), items: [] });
     saveData();
     renderHome();
     input.value = '';
@@ -158,6 +237,9 @@
 
   function openList(id) {
     currentListId = id;
+    isUrgent = false;
+    document.getElementById('urgent-toggle').classList.remove('active');
+    document.getElementById('urgent-toggle').textContent = '🔴 Mark as Urgent';
     document.getElementById('home-screen').classList.remove('active');
     document.getElementById('list-screen').classList.add('active');
     renderList();
@@ -170,24 +252,35 @@
     renderHome();
   }
 
+  function updateDashboard(list) {
+    const total   = list.items.length;
+    const done    = list.items.filter(i => i.checked).length;
+    const pending = list.items.filter(i => !i.checked).length;
+    const urgent  = list.items.filter(i => i.urgent && !i.checked).length;
+    const percent = total === 0 ? 0 : Math.round((done / total) * 100);
+    document.getElementById('stat-total').textContent   = total;
+    document.getElementById('stat-done').textContent    = done;
+    document.getElementById('stat-pending').textContent = pending;
+    document.getElementById('stat-urgent').textContent  = urgent;
+    document.getElementById('progress-fill').style.width  = percent + '%';
+    document.getElementById('progress-label').textContent = done + ' of ' + total + ' done';
+  }
+
   function renderList() {
     const list = lists.find(l => l.id === currentListId);
     if (!list) return;
     document.getElementById('list-screen-title').textContent = list.emoji + ' ' + list.name;
-    const total = list.items.length;
-    const done = list.items.filter(i => i.checked).length;
-    const percent = total === 0 ? 0 : Math.round((done / total) * 100);
-    document.getElementById('progress-fill').style.width = percent + '%';
-    document.getElementById('progress-label').textContent = done + ' of ' + total + ' done';
+    updateDashboard(list);
     const ul = document.getElementById('checklist-items');
     if (list.items.length === 0) {
       ul.innerHTML = '<div class="empty-state"><div class="icon">🗒️</div><div>No items yet. Add something above!</div></div>';
       return;
     }
     ul.innerHTML = list.items.map((item, idx) =>
-      '<li class="checklist-item ' + (item.checked ? 'done' : '') + '">' +
+      '<li class="checklist-item ' + (item.checked ? 'done' : '') + ' ' + (item.urgent && !item.checked ? 'urgent-item' : '') + '">' +
       '<input type="checkbox" ' + (item.checked ? 'checked' : '') + ' onchange="toggleItem(' + idx + ')"/>' +
       '<span class="item-label">' + item.text + '</span>' +
+      (item.urgent && !item.checked ? '<span class="urgent-badge">Urgent</span>' : '') +
       '<button class="btn-icon" onclick="deleteItem(' + idx + ')">✕</button>' +
       '</li>'
     ).join('');
@@ -198,10 +291,13 @@
     const text = input.value.trim();
     if (!text) return;
     const list = lists.find(l => l.id === currentListId);
-    list.items.push({ text, checked: false });
+    list.items.push({ text, checked: false, urgent: isUrgent });
     saveData();
     renderList();
     input.value = '';
+    isUrgent = false;
+    document.getElementById('urgent-toggle').classList.remove('active');
+    document.getElementById('urgent-toggle').textContent = '🔴 Mark as Urgent';
     input.focus();
   }
 
